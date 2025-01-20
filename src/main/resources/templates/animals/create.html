@@ -8,22 +8,17 @@
     <div th:replace="~{fragments/side::menu}"></div>
     <h1>Crear Animal</h1>
     <form action="#"
-        th:action="@{/animal/crear/}"
+        th:action="@{/animales/crear}"
         th:object="${animal}"
-        th:if="${#fields.hasErrors('name')}"
-        th:if="${#fields.hasErrors('averageLife')}"
-        th:if="${#fields.hasErrors('isExtinct')}"
-        th:errors="*{name}"
-        th:errors="*{averageLife}"
-        th:errors="*{isExtinct}"
+
         method="post">
-        <label for="name"></label>
+        <label for="name">Nombre: </label>
         <input type="text" id="name" th:field="*{name}">
 
-        <label for="avgLife"></label>
+        <label for="avgLife">Promedio de vida: </label>
         <input type="number" id="avgLife"  th:field="*{averageLife}">
 
-        <label for="extinct"></label>
+        <label for="extinct">¿Extinto?</label>
         <input type="checkbox" id="extinct" th:field="*{isExtinct}">
     </form>
 </body>

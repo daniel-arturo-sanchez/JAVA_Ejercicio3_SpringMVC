@@ -24,7 +24,7 @@ public class AnimalesController {
         model.addAttribute("animal", new Animal());
         return "animals/create";
     }
-    @PostMapping("/animales/create")
+    @PostMapping("/animales/crear")
     public String crearAnimal(@Valid @ModelAttribute("animal") Animal animal, BindingResult bindingResult){
         String result;
         if(bindingResult.hasErrors()){
