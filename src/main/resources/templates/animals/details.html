@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div th:replace="~{fragments/side::menu}"></div>
-    <h1>Hola Details</h1>
+    <main >
+        <h1 th:text="${animal}"></h1>
+
+        </ul>
+    </main>
 </body>
 </html>

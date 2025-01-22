@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div th:replace="~{fragments/side::menu}"></div>
-    <h1>Hola Index</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Edad Promedio</th>
+            <th>Extinto</th>
+            <th>Detalles</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="animal : ${animals}">
+                <td th:text="${animal.id}"></td>
+                <td th:text="${animal.name}"></td>
+                <td th:text="${animal.averageLife}"></td>
+                <td th:text="${animal.isExtinct}? Sí : No"></td>
+                <td><a th:href="@{/animales/detalles/{id}(id=${animal.id})}">Detalles</a></td>
+                <td><a th:href="@{/animales/editar/{id}(id=${animal.id})}">Editar</a></td>
+                <td><a th:href="@{/animales/borrar/{id}(id=${animal.id})}">Borrar</a></td>
+            </tr>
+
+        </tbody>
+    </table>
 </body>
 </html>

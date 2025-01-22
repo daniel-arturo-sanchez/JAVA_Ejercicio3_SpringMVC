@@ -10,7 +10,7 @@ import jakarta.validation.constraints.*;
 public class Animal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank
@@ -18,14 +18,12 @@ public class Animal {
     @Size(min = 3, max = 15)
     private String name;
 
-    @NotBlank
     @NotNull
     @Min(0)
     @Max(600)
     private int averageLife;
 
     @NotNull
-    @NotBlank
     private boolean isExtinct;
 
     public int getId() {

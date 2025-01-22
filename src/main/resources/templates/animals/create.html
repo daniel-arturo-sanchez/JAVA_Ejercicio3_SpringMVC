@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div th:replace="~{fragments/side::menu}"></div>
@@ -10,8 +11,9 @@
     <form action="#"
         th:action="@{/animales/crear}"
         th:object="${animal}"
-
         method="post">
+
+        <input type="text" th:field="*{id}" hidden>
         <label for="name">Nombre: </label>
         <input type="text" id="name" th:field="*{name}">
 
@@ -19,7 +21,9 @@
         <input type="number" id="avgLife"  th:field="*{averageLife}">
 
         <label for="extinct">¿Extinto?</label>
-        <input type="checkbox" id="extinct" th:field="*{isExtinct}">
+        <input type="checkbox" id="extinct" th:field="*{isExtinct}" th:value="*{isExtinct}">
+
+        <input type="submit" value="Crear">
     </form>
 </body>
 </html>

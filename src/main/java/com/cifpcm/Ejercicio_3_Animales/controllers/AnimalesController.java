@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,8 @@ public class AnimalesController {
     AnimalsService as;
 
     @GetMapping("/animales")
-    public String listaAnimales(Model model){
+    public String listaAnimales(Model model, ModelMap modelMap){
+        model.addAttribute("animals", as.list());
         return "animals/index";
     }
 
@@ -30,6 +32,9 @@ public class AnimalesController {
         if(bindingResult.hasErrors()){
             result = "/animals/create";
         } else {
+            int id = as.animalId();
+            animal.setId(as.animalId());
+            as.create(animal);
             result = "redirect:/animales";
         }
         return result;
@@ -37,16 +42,26 @@ public class AnimalesController {
 
     @GetMapping("/animales/detalles/{id}")
     public String detallesAnimal(@PathVariable int id, Model model){
+        model.addAttribute("animal", as.detail(id));
         return "animals/details";
     }
 
-    @GetMapping("/animales/editar")
-    public String editarAnimal(Model model){
-        return "animals/edit";
+    @PutMapping("/animales/editar/{id}")
+    public String editarAnimal(@PathVariable int id, @Valid @ModelAttribute Animal animal, BindingResult bindingResult){
+        String result;
+        if(bindingResult.hasErrors()){
+            result = "/animals/editar/"+animal.getId();
+        } else {
+            as.edit(id, animal);
+            result = "redirect:/animales";
+        }
+        return result;
     }
 
-    @GetMapping("/animales/borrar")
-    public String eliminarAnimal(Model model){
+
+
+    @GetMapping("/animales/borrar/{id}")
+    public String eliminarAnimal(@PathVariable int id, Model model){
         return "animals/delete";
     }
 }
