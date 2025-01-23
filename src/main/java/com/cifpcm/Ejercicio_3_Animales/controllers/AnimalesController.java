@@ -32,7 +32,6 @@ public class AnimalesController {
         if(bindingResult.hasErrors()){
             result = "/animals/create";
         } else {
-            int id = as.animalId();
             animal.setId(as.animalId());
             as.create(animal);
             result = "redirect:/animales";

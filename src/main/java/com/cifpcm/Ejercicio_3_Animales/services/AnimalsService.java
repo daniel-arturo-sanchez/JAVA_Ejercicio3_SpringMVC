@@ -48,7 +48,13 @@ public class AnimalsService implements IAnimalsService {
     }
 
     public Animal detail(int id){
-        return animals.stream().filter(animal -> animal.getId() == id).findFirst().get();
+        Animal result = null;
+        Animal animalResult = animals.stream()
+                                    .filter(animal -> animal.getId() == id).findFirst().orElse(null);
+        if(animalResult != null){
+            result = animalResult;
+        }
+        return result;
     }
 
     public void create(Animal animal){
