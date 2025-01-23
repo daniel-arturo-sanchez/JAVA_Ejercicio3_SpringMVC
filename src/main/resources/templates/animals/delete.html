@@ -7,6 +7,16 @@
 </head>
 <body>
     <div th:replace="~{fragments/side::menu}"></div>
-    <h1>Hola Delete</h1>
+    <h1>Borrar Animal</h1>
+    <form action="#"
+          th:action="@{/animales/borrar/{id} (id=${id})}"
+          th:object="${animal}"
+          method="post">
+
+        <p th:text="'¿Estás seguro que quieres eliminar a '+ ${animal.name} + ' de la lista?'" ></p>
+
+        <input type="submit" value="Borrar">
+        <a th:href="@{/animales}">Volver</a>
+    </form>
 </body>
 </html>
