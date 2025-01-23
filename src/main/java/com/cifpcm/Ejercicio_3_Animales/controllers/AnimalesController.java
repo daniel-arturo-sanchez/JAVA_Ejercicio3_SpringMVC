@@ -16,7 +16,7 @@ public class AnimalesController {
     AnimalsService as;
 
     @GetMapping("/animales")
-    public String listaAnimales(Model model, ModelMap modelMap){
+    public String listaAnimales(Model model){
         model.addAttribute("animals", as.list());
         return "animals/index";
     }
