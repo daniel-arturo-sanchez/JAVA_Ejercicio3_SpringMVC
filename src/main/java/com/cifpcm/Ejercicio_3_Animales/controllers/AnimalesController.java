@@ -49,7 +49,7 @@ public class AnimalesController {
     public String editarAnimal(@PathVariable int id, @Valid @ModelAttribute Animal animal, BindingResult bindingResult){
         String result;
         if(bindingResult.hasErrors()){
-            result = "/animals/editar/"+animal.getId();
+            result = "/animals/edit/"+animal.getId();
         } else {
             as.edit(id, animal);
             result = "redirect:/animales";
