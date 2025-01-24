@@ -2,6 +2,7 @@ package com.cifpcm.Ejercicio_3_Animales.controllers;
 
 import com.cifpcm.Ejercicio_3_Animales.models.Animal;
 import com.cifpcm.Ejercicio_3_Animales.services.AnimalsService;
+import com.cifpcm.Ejercicio_3_Animales.services.AnimalsServiceSQL;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,12 @@ public class AnimalesController {
     @Autowired
     AnimalsService as;
 
+    @Autowired
+    AnimalsServiceSQL asSQL;
+
     @GetMapping("/animales")
     public String listaAnimales(Model model){
-        model.addAttribute("animals", as.list());
+        model.addAttribute("animals", asSQL.list());
         return "animals/index";
     }
 

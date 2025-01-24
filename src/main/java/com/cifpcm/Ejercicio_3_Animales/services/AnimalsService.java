@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Primary
 @Service
 public class AnimalsService implements IAnimalsService {
     private List<Animal> animals;
     private static int animalId = 1;
+
     AnimalsService() {
         animals = new ArrayList<Animal>();
         Animal animal1 = new Animal();

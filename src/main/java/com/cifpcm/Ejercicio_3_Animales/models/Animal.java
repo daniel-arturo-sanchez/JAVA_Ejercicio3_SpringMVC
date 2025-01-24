@@ -10,7 +10,7 @@ import jakarta.validation.constraints.*;
 public class Animal {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank
