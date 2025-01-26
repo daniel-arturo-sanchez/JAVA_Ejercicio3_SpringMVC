@@ -36,8 +36,8 @@ public class AnimalesController {
         if(bindingResult.hasErrors()){
             result = "/animals/create";
         } else {
-            animal.setId(as.animalId());
-            as.create(animal);
+            //animal.setId(as.animalId());
+            asSQL.create(animal);
             result = "redirect:/animales";
         }
         return result;
@@ -45,14 +45,14 @@ public class AnimalesController {
 
     @GetMapping("/animales/detalles/{id}")
     public String detallesAnimal(@PathVariable int id, Model model){
-        model.addAttribute("animal", as.detail(id));
+        model.addAttribute("animal", asSQL.detail(id));
         return "animals/details";
     }
 
     @GetMapping("/animales/editar/{id}")
     public String editarAnimal(@PathVariable int id, Model model){
         String result = null;
-        Animal editAnimal = as.detail(id);
+        Animal editAnimal = asSQL.detail(id);
         if(editAnimal != null){
             model.addAttribute("animal", editAnimal);
             result = "animals/edit";
@@ -66,7 +66,7 @@ public class AnimalesController {
         if(bindingResult.hasErrors()){
             result = "animals/edit";
         } else {
-            as.edit(id, animal);
+            asSQL.edit(id, animal);
             result = "redirect:/animales";
         }
         return result;
@@ -75,7 +75,7 @@ public class AnimalesController {
     @GetMapping("/animales/borrar/{id}")
     public String eliminarAnimal(@PathVariable int id, Model model){
         String result;
-        Animal deleteAnimal = as.detail(id);
+        Animal deleteAnimal = asSQL.detail(id);
         if(deleteAnimal != null){
             model.addAttribute("animal", deleteAnimal);
             result = "animals/delete";
@@ -87,7 +87,7 @@ public class AnimalesController {
 
     @PostMapping("/animales/borrar/{id}")
     public String eliminarAnimal(@PathVariable int id){
-        as.delete(id);
+        asSQL.delete(id);
         return "redirect:/animales";
     }
 

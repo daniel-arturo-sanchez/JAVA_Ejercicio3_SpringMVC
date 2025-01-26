@@ -1,25 +1,19 @@
 package com.cifpcm.Ejercicio_3_Animales.services;
 
-import com.cifpcm.Ejercicio_3_Animales.interfaces.IAnimalsService;
+import com.cifpcm.Ejercicio_3_Animales.interfaces.AnimalsService;
 import com.cifpcm.Ejercicio_3_Animales.models.Animal;
 import com.cifpcm.Ejercicio_3_Animales.repositories.AnimalesAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 @Primary
 @Service
-public class AnimalsServiceSQL implements IAnimalsService {
+public class AnimalsServiceSQL implements AnimalsService {
+
 
     @Autowired
     AnimalesAppRepository repository;
@@ -46,5 +40,9 @@ public class AnimalsServiceSQL implements IAnimalsService {
     @Override
     public void delete(int id) {
         repository.deleteById(id);
+    }
+
+    public Animal findByName(String name) {
+        return repository.findByName(name);
     }
 }

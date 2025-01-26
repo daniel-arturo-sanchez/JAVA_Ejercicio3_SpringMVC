@@ -13,17 +13,17 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
-    @NotNull
-    @Size(min = 3, max = 15)
+    @NotBlank(message = "Se requiere de un nombre para crear un animal")
+    @NotNull(message = "Se requiere de un nombre para crear un animal")
+    @Size(min = 3, max = 15, message = "Este campo debe contener entre 3 y 15 caracteres")
     private String name;
 
-    @NotNull
-    @Min(0)
-    @Max(600)
+    @NotNull(message = "Se requiere un valor para este campo")
+    @Min(value = 0, message = "El valor mínimo permitido es 0")
+    @Max(value = 600, message = "El valor máximo permitido es 600")
     private int averageLife;
 
-    @NotNull
+    @NotNull(message = "No se aceptan valores nulos para este campo")
     private boolean isExtinct;
 
     public int getId() {

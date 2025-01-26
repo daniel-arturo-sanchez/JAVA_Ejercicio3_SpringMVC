@@ -5,10 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-<nav th:fragment="menu">
-    <ul>
-        <li><a href="/animales">Lista de Animales</a></li>
-        <li><a href="/animales/crear">Crear Animal</a></li>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary" th:fragment="menu">
+    <ul class="nav gap-5">
+        <li class="navbar-brand text-white">Animales App</li>
+        <li><a class="nav-item text-white" href="/animales">Lista de Animales</a></li>
+        <li><a class="nav-item text-white" href="/animales/crear">Crear Animal</a></li>
     </ul>
 </nav>
 </body>

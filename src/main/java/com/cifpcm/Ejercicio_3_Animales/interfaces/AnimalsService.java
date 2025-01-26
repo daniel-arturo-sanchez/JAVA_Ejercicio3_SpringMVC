@@ -4,7 +4,7 @@ import com.cifpcm.Ejercicio_3_Animales.models.Animal;
 
 import java.util.List;
 
-public interface IAnimalsService {
+public interface AnimalsService {
 
     public List<Animal> list();
 

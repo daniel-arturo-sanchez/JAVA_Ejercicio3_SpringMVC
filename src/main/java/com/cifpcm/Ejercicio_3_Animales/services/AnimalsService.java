@@ -1,15 +1,13 @@
 package com.cifpcm.Ejercicio_3_Animales.services;
 
-import com.cifpcm.Ejercicio_3_Animales.interfaces.IAnimalsService;
 import com.cifpcm.Ejercicio_3_Animales.models.Animal;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AnimalsService implements IAnimalsService {
+public class AnimalsService implements com.cifpcm.Ejercicio_3_Animales.interfaces.AnimalsService {
     private List<Animal> animals;
     private static int animalId = 1;
 
