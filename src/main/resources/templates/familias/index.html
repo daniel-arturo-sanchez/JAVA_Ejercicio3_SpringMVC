@@ -2,36 +2,34 @@
 <html lang="en" xmlns:th=”http://www.thymeleaf.org”>
 <head>
     <meta charset="UTF-8">
-    <title>Animales App</title>
+    <title>Zoopolis : Familias</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div th:replace="~{fragments/side::menu}"></div>
-<h1>Lista de Animales</h1>
-<a  class="btn btn-outline-success rounded-pill" href="/animales/crear">Crear Animal</a>
+<h1>Lista de Familias</h1>
+<a  class="btn btn-outline-success rounded-pill" href="/familias/crear">Crear Familia</a>
     <table class="table text-center">
         <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Edad Promedio</th>
-            <th>Extinto</th>
-            <th>Familia</th>
+            <th>Animales</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-            <tr th:each="animal : ${animals}">
-                <td th:text="${animal.id}"></td>
-                <td th:text="${animal.name}"></td>
-                <td th:text="${animal.averageLife}"></td>
-                <td th:text="${animal.isExtinct}? Sí : No"></td>
-                <td th:text="${animal.family.name}"></td>
+            <tr th:each="familia : ${families}">
+                <td th:text="${familia.id}"></td>
+                <td th:text="${familia.name}"></td>
+                <td>
+                    <p th:each="animal: ${familia.animals}" th:text="${animal.name}"></p>
+                </td>
                 <td class="text-center">
-                    <a class="btn btn-secondary rounded-pill" th:href="@{/animales/detalles/{id}(id=${animal.id})}">Detalles</a>
-                    <a class="btn btn-warning rounded-pill" th:href="@{/animales/editar/{id}(id=${animal.id})}">Editar</a>
-                    <a class="btn btn-danger rounded-pill" th:href="@{/animales/borrar/{id}(id=${animal.id})}">Borrar</a>
+                    <a class="btn btn-secondary rounded-pill" th:href="@{/familias/detalles/{id}(id=${familia.id})}">Detalles</a>
+                    <a class="btn btn-warning rounded-pill" th:href="@{/familias/editar/{id}(id=${familia.id})}">Editar</a>
+                    <a class="btn btn-danger rounded-pill" th:href="@{/familias/borrar/{id}(id=${familia.id})}">Borrar</a>
                 </td>
             </tr>
         </tbody>

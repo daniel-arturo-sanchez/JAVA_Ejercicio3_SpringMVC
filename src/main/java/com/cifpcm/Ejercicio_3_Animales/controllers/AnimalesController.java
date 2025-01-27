@@ -3,6 +3,7 @@ package com.cifpcm.Ejercicio_3_Animales.controllers;
 import com.cifpcm.Ejercicio_3_Animales.models.Animal;
 import com.cifpcm.Ejercicio_3_Animales.services.AnimalsService;
 import com.cifpcm.Ejercicio_3_Animales.services.AnimalsServiceSQL;
+import com.cifpcm.Ejercicio_3_Animales.services.FamilyServiceSQL;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +20,25 @@ public class AnimalesController {
     @Autowired
     AnimalsServiceSQL asSQL;
 
+    @Autowired
+    FamilyServiceSQL fs;
+
+    @GetMapping("/")
+    public String index(Model model) {
+        return "index";
+    }
+
     @GetMapping("/animales")
     public String listaAnimales(Model model){
         model.addAttribute("animals", asSQL.list());
+        model.addAttribute("families", fs.list());
         return "animals/index";
     }
 
     @GetMapping("/animales/crear")
     public String crearAnimal(Model model){
         model.addAttribute("animal", new Animal());
+        model.addAttribute("families", fs.list());
         return "animals/create";
     }
     @PostMapping("/animales/crear")
@@ -46,6 +57,7 @@ public class AnimalesController {
     @GetMapping("/animales/detalles/{id}")
     public String detallesAnimal(@PathVariable int id, Model model){
         model.addAttribute("animal", asSQL.detail(id));
+        model.addAttribute("family", fs.list());
         return "animals/details";
     }
 
@@ -55,6 +67,7 @@ public class AnimalesController {
         Animal editAnimal = asSQL.detail(id);
         if(editAnimal != null){
             model.addAttribute("animal", editAnimal);
+            model.addAttribute("families", fs.list());
             result = "animals/edit";
         }
         return result;
@@ -90,5 +103,4 @@ public class AnimalesController {
         asSQL.delete(id);
         return "redirect:/animales";
     }
-
 }

@@ -2,23 +2,24 @@
 <html lang="en" xmlns:th=”http://www.thymeleaf.org”>
 <head>
     <meta charset="UTF-8">
-    <title>Detalles de Animal</title>
+    <title>Borrar Familia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div th:replace="~{fragments/side::menu}"></div>
-    <main >
-        <h1 th:text="${animal.name}"></h1>
-        <ul>
-            <li th:text="'Id: '+${animal.id}"></li>
-            <li th:text="'Nombre: '+${animal.name}"></li>
-            <li th:text="'Tiempo de vida promedio: '+${animal.averageLife}"></li>
-            <li th:text="${animal.isExtinct}? 'Extinto' : 'No Extinto'"></li>
-            <li th:text="${animal.family.name}"></li>
-        </ul>
-        <a class="btn btn-secondary rounded-pill" th:href="@{/animales}">Volver</a>
-    </main>
+    <h1>Borrar Familia</h1>
+    <form action="#"
+          th:action="@{/familias/borrar/{id} (id=${id})}"
+          th:object="${family}"
+          method="post">
+
+        <p th:text="'¿Estás seguro que quieres eliminar a '+ ${family.name} + ' de la lista?'" ></p>
+
+        <a class="btn btn-secondary rounded-pill" th:href="@{/familias}">Volver</a>
+        <input class="btn btn-danger rounded-pill" type="submit" value="Borrar">
+
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>

@@ -1,9 +1,6 @@
 package com.cifpcm.Ejercicio_3_Animales.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 @Entity
@@ -25,6 +22,9 @@ public class Animal {
 
     @NotNull(message = "No se aceptan valores nulos para este campo")
     private boolean isExtinct;
+
+    @ManyToOne
+    private Family family;
 
     public int getId() {
         return id;
@@ -57,4 +57,9 @@ public class Animal {
     public void setIsExtinct(boolean isExtinct){
         this.isExtinct = isExtinct;
     }
+
+    public Family getFamily() {return family;}
+
+    public void setFamily(Family family) { this.family = family; }
+
 }

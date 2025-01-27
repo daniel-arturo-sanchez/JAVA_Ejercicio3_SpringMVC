@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface AnimalesAppRepository extends JpaRepository<Animal, Integer> {
-    Animal findByName(String name);
+    public Animal findByName(String name);
 }
