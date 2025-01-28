@@ -1,7 +1,6 @@
 package com.cifpcm.Ejercicio_3_Animales.services;
 
 import com.cifpcm.Ejercicio_3_Animales.interfaces.FamilyService;
-import com.cifpcm.Ejercicio_3_Animales.models.Animal;
 import com.cifpcm.Ejercicio_3_Animales.models.Family;
 import com.cifpcm.Ejercicio_3_Animales.repositories.FamiliesAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +44,5 @@ public class FamilyServiceSQL implements FamilyService {
     public Family findByName(String name) {
         return repository.findByName(name);
     }
+
 }

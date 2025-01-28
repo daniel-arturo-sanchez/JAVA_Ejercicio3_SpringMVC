@@ -7,8 +7,10 @@ import org.hibernate.validator.constraints.UniqueElements;
 import java.util.List;
 
 @Entity
+@Table( name = "User" )
 @Getter @Setter @NoArgsConstructor
 public class User {
+    @Column(name = "user_id")
     private @Id @Setter(AccessLevel.PROTECTED)
             @GeneratedValue(strategy = GenerationType.IDENTITY)
             int id;
@@ -18,6 +20,11 @@ public class User {
 
     private String password;
 
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "User_Role",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    )
     private List<Role> roles;
 }

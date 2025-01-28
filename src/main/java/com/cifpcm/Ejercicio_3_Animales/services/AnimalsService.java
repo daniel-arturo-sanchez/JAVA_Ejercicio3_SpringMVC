@@ -2,7 +2,6 @@ package com.cifpcm.Ejercicio_3_Animales.services;
 
 import com.cifpcm.Ejercicio_3_Animales.models.Animal;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 

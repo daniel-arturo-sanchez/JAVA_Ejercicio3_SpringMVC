@@ -1,40 +1,37 @@
 package com.cifpcm.Ejercicio_3_Animales.services;
 
-import com.cifpcm.Ejercicio_3_Animales.interfaces.AnimalsService;
-import com.cifpcm.Ejercicio_3_Animales.models.Animal;
-import com.cifpcm.Ejercicio_3_Animales.repositories.AnimalesAppRepository;
+import com.cifpcm.Ejercicio_3_Animales.models.Role;
+import com.cifpcm.Ejercicio_3_Animales.repositories.RolesAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Primary
 @Service
-public class AnimalsServiceSQL implements AnimalsService {
-
-
+public class RolesService implements com.cifpcm.Ejercicio_3_Animales.interfaces.RolesService {
 
     @Autowired
-    AnimalesAppRepository repository;
+    RolesAppRepository repository;
+
     @Override
-    public List<Animal> list() {
+    public List<Role> list() {
         return repository.findAll();
     }
 
     @Override
-    public Animal detail(int id) {
+    public Role detail(int id) {
         return repository.findById(id).get();
     }
 
     @Override
-    public void create(Animal animal) {
-        repository.save(animal);
+    public void create(Role role) {
+        repository.save(role);
     }
 
     @Override
-    public void edit(int id, Animal animal) {
-        repository.save(animal);
+    public void edit(int id, Role role) {
+        repository.save(role);
     }
 
     @Override
@@ -42,8 +39,7 @@ public class AnimalsServiceSQL implements AnimalsService {
         repository.deleteById(id);
     }
 
-    public Animal findByName(String name) {
+    public Role findByName(String name) {
         return repository.findByName(name);
     }
-
 }
