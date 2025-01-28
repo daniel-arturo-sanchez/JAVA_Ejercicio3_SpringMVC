@@ -10,7 +10,7 @@ public interface UsersService extends UserDetailsService {
 
     public User detail(int id);
 
-    public void create(User role);
+    public void create(User role) throws Exception;
 
     public void edit(int id, User role);
 

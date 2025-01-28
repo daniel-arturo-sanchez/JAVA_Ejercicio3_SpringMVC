@@ -28,8 +28,6 @@
             <span th:if="${#fields.hasErrors('averageLife')}" th:errors="*{averageLife}" class="error small text-danger"></span>
         </div>
 
-
-
         <div class="col-md-6">
             <input type="checkbox" class="form-check-input" id="extinct" th:field="*{isExtinct}" th:value="*{isExtinct}" />
             <label class="form-check-label" for="extinct">¿Extinto?</label>

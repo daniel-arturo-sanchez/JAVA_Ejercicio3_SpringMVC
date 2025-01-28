@@ -38,13 +38,16 @@ public class UsersService implements com.cifpcm.Ejercicio_3_Animales.interfaces.
     }
 
     @Override
-    public void create(User user) {
-        List<Role> roles = user.getRoles();
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-
-        repository.save(user);
+    public void create(User user) throws Exception{
+        if(findByUsername(user.getUsername()) != null){
+            List<Role> roles = user.getRoles();
+            Role role = rolesAppRepository.findByName("ROLE_USER");
+            roles.add(role);
+            user.setRoles(roles);
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            user.setPassword(encoder.encode(user.getPassword()));
+            repository.save(user);
+        }
     }
 
     @Override
