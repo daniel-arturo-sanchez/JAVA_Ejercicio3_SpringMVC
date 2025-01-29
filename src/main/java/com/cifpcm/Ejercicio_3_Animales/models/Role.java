@@ -13,14 +13,15 @@ import java.util.List;
 @Entity
 @Table( name = "Role" )
 @Getter
-@Setter @NoArgsConstructor
+@Setter
+@NoArgsConstructor
 public class Role {
 
     @Column(name = "role_id")
-    private @Id
+    @Id
     @Setter(AccessLevel.PROTECTED)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @UniqueElements
     private String name;

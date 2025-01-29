@@ -4,6 +4,7 @@ import com.cifpcm.Ejercicio_3_Animales.models.Role;
 import com.cifpcm.Ejercicio_3_Animales.models.User;
 import com.cifpcm.Ejercicio_3_Animales.repositories.RolesAppRepository;
 import com.cifpcm.Ejercicio_3_Animales.repositories.UsersAppRepository;
+import com.cifpcm.Ejercicio_3_Animales.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,13 +20,13 @@ import java.util.stream.Collectors;
 
 @Primary
 @Service
-public class UsersService implements com.cifpcm.Ejercicio_3_Animales.interfaces.UsersService {
+public class UserService implements com.cifpcm.Ejercicio_3_Animales.interfaces.UserService {
 
     @Autowired
     UsersAppRepository repository;
 
     @Autowired
-    RolesAppRepository rolesAppRepository;
+    SecurityConfig securityConfig;
 
     @Override
     public List<User> list() {
@@ -38,16 +39,9 @@ public class UsersService implements com.cifpcm.Ejercicio_3_Animales.interfaces.
     }
 
     @Override
-    public void create(User user) throws Exception{
-        if(findByUsername(user.getUsername()) != null){
-            List<Role> roles = user.getRoles();
-            Role role = rolesAppRepository.findByName("ROLE_USER");
-            roles.add(role);
-            user.setRoles(roles);
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            repository.save(user);
-        }
+    public void create(User user) throws Exception {
+        user.setPassword(securityConfig.passwordEncoder().encode(user.getPassword()));
+        repository.save(user);
     }
 
     @Override
@@ -66,21 +60,26 @@ public class UsersService implements com.cifpcm.Ejercicio_3_Animales.interfaces.
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new UserDetails() {
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return repository.findByUsername(username).getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-            }
 
-            @Override
-            public String getPassword() {
-                return repository.findByUsername(username).getPassword();
+            User user = repository.findByUsername(username);
+            if (user == null) {
+                throw new UsernameNotFoundException(username);
             }
+            return new UserDetails() {
+                @Override
+                public Collection<? extends GrantedAuthority> getAuthorities() {
+                    return user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+                }
 
-            @Override
-            public String getUsername() {
-                return repository.findByUsername(username).getUsername();
-            }
-        };
+                @Override
+                public String getPassword() {
+                    return user.getPassword();
+                }
+
+                @Override
+                public String getUsername() {
+                    return user.getUsername();
+                }
+            };
     }
 }

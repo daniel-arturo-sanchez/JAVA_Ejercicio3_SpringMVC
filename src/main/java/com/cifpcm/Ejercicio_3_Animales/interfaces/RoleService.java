@@ -3,7 +3,7 @@ package com.cifpcm.Ejercicio_3_Animales.interfaces;
 import com.cifpcm.Ejercicio_3_Animales.models.Role;
 import java.util.List;
 
-public interface RolesService {
+public interface RoleService {
     public List<Role> list();
 
     public Role detail(int id);

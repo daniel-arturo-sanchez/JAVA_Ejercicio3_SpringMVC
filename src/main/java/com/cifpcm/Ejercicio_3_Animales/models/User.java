@@ -10,10 +10,12 @@ import java.util.List;
 @Table( name = "User" )
 @Getter @Setter @NoArgsConstructor
 public class User {
+
     @Column(name = "user_id")
-    private @Id @Setter(AccessLevel.PROTECTED)
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
-            int id;
+    @Id
+    @Setter(AccessLevel.PROTECTED)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Email
     @UniqueElements
     private String username;

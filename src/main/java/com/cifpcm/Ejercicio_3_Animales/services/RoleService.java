@@ -9,7 +9,7 @@ import java.util.List;
 
 @Primary
 @Service
-public class RolesService implements com.cifpcm.Ejercicio_3_Animales.interfaces.RolesService {
+public class RoleService implements com.cifpcm.Ejercicio_3_Animales.interfaces.RoleService {
 
     @Autowired
     RolesAppRepository repository;
