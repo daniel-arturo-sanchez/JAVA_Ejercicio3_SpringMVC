@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -25,6 +26,11 @@ public class SecurityConfig {
     UserService usersService;
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->
                 authz.requestMatchers("/login","/register").permitAll()
@@ -33,6 +39,7 @@ public class SecurityConfig {
 
         http.formLogin(form -> form
                 .loginPage("/login")
+                .successForwardUrl("/")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/")
                 .permitAll()
@@ -41,6 +48,7 @@ public class SecurityConfig {
         http.logout(form -> form
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
+
         );
 
         http.userDetailsService(usersService);
@@ -57,16 +65,19 @@ public class SecurityConfig {
         );
     }
 
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Bean
     @ConditionalOnMissingBean(UserDetailsService.class)
     InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         return new InMemoryUserDetailsManager(User.withUsername("user")
                 .password("password").roles("ROLE_USER").build());
+    }
+
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // Configure in-memory authentication with two users
+        auth.inMemoryAuthentication()
+                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
+                .and()
+               .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
+        auth.build();
     }
 }

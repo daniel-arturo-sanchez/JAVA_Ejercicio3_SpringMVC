@@ -4,12 +4,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table( name = "User" )
 @Getter @Setter @NoArgsConstructor
-public class User {
+public class User  {
 
     @Column(name = "user_id")
     @Id
@@ -17,7 +23,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Email
-    @UniqueElements
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -28,5 +34,6 @@ public class User {
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") }
     )
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
+
 }

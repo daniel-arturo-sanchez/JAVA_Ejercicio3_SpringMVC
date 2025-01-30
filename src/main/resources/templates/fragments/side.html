@@ -11,6 +11,11 @@
         <li><a class="nav-item text-white" href="/animales">Animales</a></li>
         <li><a class="nav-item text-white" href="/familias">Familias</a></li>
     </ul>
+<div class="position-absolute top-0 end-0">
+    <form th:action="@{/logout}" method="post">
+        <input class="btn btn-outline-light text-light m-1" type="submit" value="Logout">
+    </form>
+</div>
 </nav>
 </body>
 </html>
