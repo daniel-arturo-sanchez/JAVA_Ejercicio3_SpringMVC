@@ -15,7 +15,7 @@
             <li th:text="'Nombre: '+${animal.name}"></li>
             <li th:text="'Tiempo de vida promedio: '+${animal.averageLife}"></li>
             <li th:text="${animal.isExtinct}? 'Extinto' : 'No Extinto'"></li>
-            <li th:text="${animal.family.name}"></li>
+<!--            <li th:text="${animal.family.name}"></li>-->
         </ul>
         <a class="btn btn-secondary rounded-pill" th:href="@{/animales}">Volver</a>
     </main>

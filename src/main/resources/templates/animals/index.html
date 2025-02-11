@@ -17,7 +17,7 @@
             <th>Nombre</th>
             <th>Edad Promedio</th>
             <th>Extinto</th>
-            <th>Familia</th>
+<!--            <th>Familia</th>-->
             <th>Acciones</th>
         </tr>
         </thead>
@@ -27,7 +27,7 @@
                 <td th:text="${animal.name}"></td>
                 <td th:text="${animal.averageLife}"></td>
                 <td th:text="${animal.isExtinct}? Sí : No"></td>
-                <td th:text="${animal.family.name}"></td>
+<!--                <td th:text="${animal.family.name}"></td>-->
                 <td class="text-center">
                     <a class="btn btn-secondary rounded-pill" th:href="@{/animales/detalles/{id}(id=${animal.id})}">Detalles</a>
                     <a class="btn btn-warning rounded-pill" th:href="@{/animales/editar/{id}(id=${animal.id})}">Editar</a>

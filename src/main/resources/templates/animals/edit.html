@@ -31,13 +31,13 @@
             <label for="extinct" class="form-check-label">¿Extinto?</label>
         </div>
 
-        <div class="col-md-6">
-            <label for="family" class="form-label">Familia: </label>
-            <select name="family" id="family" class="form-control" th:field="*{family}" th:classappend="${#fields.hasErrors('family')} ? 'border border-danger' : ''">
-                <option th:each="family: ${families}" th:text="${family.name}" th:value="${family.id}"></option>
-            </select>
-            <span th:if="${#fields.hasErrors('family')}" th:errors="*{family}" class="error small text-danger"></span>
-        </div>
+<!--        <div class="col-md-6">-->
+<!--            <label for="family" class="form-label">Familia: </label>-->
+<!--            <select name="family" id="family" class="form-control" th:field="*{family}" th:classappend="${#fields.hasErrors('family')} ? 'border border-danger' : ''">-->
+<!--                <option th:each="family: ${families}" th:text="${family.name}" th:value="${family.id}"></option>-->
+<!--            </select>-->
+<!--            <span th:if="${#fields.hasErrors('family')}" th:errors="*{family}" class="error small text-danger"></span>-->
+<!--        </div>-->
 
         <a class="btn btn-secondary rounded-pill" th:href="@{/animales}">Volver</a>
         <input type="submit" class="btn btn-outline-success rounded-pill" value="Actualizar">
